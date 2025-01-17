@@ -1,0 +1,34 @@
+# Ignore build directories
+/build/
+/bin/
+/obj/
+/out/
+
+# Ignore compiled object files
+*.o
+*.obj
+*.exe
+*.out
+*.app
+*.lib
+*.dll
+*.so
+*.dylib
+main 
+
+# Ignore temporary files
+*.tmp
+*.log
+*.swp
+*.swo
+*.bak
+*.old
+
+# Ignore generated files
+*.gch
+*.pch
+
+
+# Ignore OS specific files
+.DS_Store
+Thumbs.db
