@@ -14,7 +14,7 @@ Game::Game()
 Block Game::GetRandomBlock()
 {
     // this looks like a hardware random number generator
-    // idk copilot made this XD
+    // idk i yoiked it from stackoverflow
     std::random_device rd;
     std::mt19937 gen(rd());
     std::uniform_int_distribution<> dis(0, blocks.size() - 1);
