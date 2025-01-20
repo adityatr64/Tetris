@@ -46,5 +46,25 @@ void Grid::DrawGrid()
 
 int Grid::WindowCheck(int x, int y)
 {
-  return !(y >= 0 && x >= 0 && x < rowSize && y < columnSize);
+  if (x < 0)
+  {
+    return 1;
+  }
+  else if (y < 0)
+  {
+    return 1; // left overflow
+  }
+  else if (x >= rowSize)
+  {
+    return 2; // right overflow
+  }
+  else if (y >= columnSize)
+  {
+    return 3; // bottom overflow
+  }
+  else if (y < 0)
+  {
+    return 4; // top overflow
+  }
+  return 0;
 }

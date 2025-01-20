@@ -44,7 +44,7 @@ std::vector<position> Block::GetBlockPos()
 
 void Block::RotateBlock()
 {
-  rotation++;
+  ++rotation;
   if (rotation > 3)
   {
     rotation = 0;

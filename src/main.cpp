@@ -3,6 +3,7 @@
 #include "ChildBlocks.cpp"
 #include "main.h"
 #include <random>
+#include <iostream>
 
 Game::Game()
 {
@@ -43,7 +44,7 @@ void Game::HandleInput()
         ControlBlock('d'); // move down
         break;
     case KEY_UP:
-        RotateBlock(); // rotate
+        ControlBlock('u'); // rotate
         break;
     default:
         break;
@@ -56,51 +57,51 @@ void Game::ControlBlock(char dir)
     {
     case 'l':
         cur.MoveBlock(0, -1);
-        if (windowCheck())
+        if (_windowCheck())
         {
             cur.MoveBlock(0, 1);
         }
-
         break;
     case 'r':
         cur.MoveBlock(0, 1);
-        if (windowCheck())
+        if (_windowCheck())
         {
             cur.MoveBlock(0, -1);
         }
         break;
     case 'd':
         cur.MoveBlock(1, 0);
-        if (windowCheck())
+        if (_windowCheck())
         {
             cur.MoveBlock(-1, 0);
         }
+        break;
+    case 'u':
+        std::cout << "rotate :" << std::endl;
+        _RotateBlock();
         break;
     default:
         break;
     }
 }
 
-bool Game::windowCheck()
+bool Game::_windowCheck()
 {
     std::vector<position> tiles = cur.GetBlockPos();
     for (position item : tiles)
     {
         if (grid.WindowCheck(item.x, item.y))
         {
+            std::cout << "Window Check : " << grid.WindowCheck(item.x, item.y) << std::endl;
             return true;
         }
     }
     return false;
 }
 
-void Game::RotateBlock()
+void Game::_RotateBlock()
 {
     cur.RotateBlock();
-    if (windowCheck())
-    {
-        cur.RotateBlock();
-    }
 }
 
 int main()
