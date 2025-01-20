@@ -13,7 +13,8 @@ public:
   void ControlBlock(char);
 
 private:
-  bool _windowCheck();
+  void _kickBack(int);
+  int _windowCheck();
   void _RotateBlock();
   std::vector<Block> blocks;
   Block cur;

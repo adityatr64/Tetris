@@ -56,15 +56,16 @@ int Grid::WindowCheck(int x, int y)
   }
   else if (x >= rowSize)
   {
-    return 2; // right overflow
+    return 3; // bottom overflow
   }
   else if (y >= columnSize)
   {
-    return 3; // bottom overflow
+    return 2; // right overflow
   }
   else if (y < 0)
   {
     return 4; // top overflow
   }
+  // try to write a switch if possible not needed tbh cos compiler optimizations
   return 0;
 }

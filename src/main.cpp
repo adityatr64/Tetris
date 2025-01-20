@@ -77,23 +77,32 @@ void Game::ControlBlock(char dir)
         }
         break;
     case 'u':
+    {
+
         std::cout << "rotate :" << std::endl;
         _RotateBlock();
         break;
+    }
     default:
         break;
     }
 }
 
-bool Game::_windowCheck()
+void Game::_kickBack(int from)
+{
+    cur.KickBack(from);
+}
+
+int Game::_windowCheck()
 {
     std::vector<position> tiles = cur.GetBlockPos();
     for (position item : tiles)
     {
-        if (grid.WindowCheck(item.x, item.y))
+        int overflow = grid.WindowCheck(item.x, item.y);
+        if (overflow)
         {
             std::cout << "Window Check : " << grid.WindowCheck(item.x, item.y) << std::endl;
-            return true;
+            return overflow;
         }
     }
     return false;
@@ -102,6 +111,11 @@ bool Game::_windowCheck()
 void Game::_RotateBlock()
 {
     cur.RotateBlock();
+    int overflow = _windowCheck();
+    if (overflow)
+    {
+        _kickBack(overflow);
+    }
 }
 
 int main()
