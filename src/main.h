@@ -10,7 +10,11 @@ public:
   Grid grid;
   void HandleInput();
 
+  void ControlBlock(char);
+
 private:
+  bool windowCheck();
+  void RotateBlock();
   std::vector<Block> blocks;
   Block cur;
   Block next;

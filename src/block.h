@@ -26,4 +26,5 @@ public:
   std::vector<position> GetBlockPos();
   int id;
   std::map<int, std::vector<position>> cells;
+  void RotateBlock();
 };

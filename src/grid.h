@@ -8,6 +8,7 @@ public:
   void init();
   void printGrid();
   void DrawGrid();
+  int WindowCheck(int, int);
   int grid[24][10];
 
 private:

@@ -41,3 +41,12 @@ std::vector<position> Block::GetBlockPos()
   }
   return moved;
 }
+
+void Block::RotateBlock()
+{
+  rotation++;
+  if (rotation > 3)
+  {
+    rotation = 0;
+  }
+}

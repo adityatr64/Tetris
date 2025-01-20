@@ -4,7 +4,7 @@
 #include <vector>
 Grid::Grid() // constructor
 {
-  rowSize = 24;
+  rowSize = 17;
   columnSize = 10;
   cellSize = 30; // pixels
   init();
@@ -42,4 +42,9 @@ void Grid::DrawGrid()
       DrawRectangle(column * cellSize + 1, row * cellSize + 1, cellSize - 1, cellSize - 1, colors[colorVal]); //  -/+ is for offset
     }
   }
+}
+
+int Grid::WindowCheck(int x, int y)
+{
+  return !(y >= 0 && x >= 0 && x < rowSize && y < columnSize);
 }
