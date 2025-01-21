@@ -51,6 +51,15 @@ void Block::RotateBlock()
   }
 }
 
+void Block::UnRotateBlock()
+{
+  --rotation;
+  if (rotation < 0)
+  {
+    rotation = 3;
+  }
+}
+
 void Block::KickBack(int from)
 {
   switch (from)
@@ -63,6 +72,9 @@ void Block::KickBack(int from)
     break;
   case 3:
     MoveBlock(-1, 0);
+    break;
+  case 4:
+    MoveBlock(1, 0);
     break;
   default:
     break;

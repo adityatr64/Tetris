@@ -27,5 +27,6 @@ public:
   int id;
   std::map<int, std::vector<position>> cells;
   void RotateBlock();
+  void UnRotateBlock();
   void KickBack(int);
 };

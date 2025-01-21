@@ -5,6 +5,20 @@
 #include <random>
 #include <iostream>
 
+double lastUpdateTick = 0;
+int invincibilityFrames = 0; // change this
+double tickRate = 0.4;
+
+bool UpdateTick(double tickRate)
+{
+    if (GetTime() - lastUpdateTick >= tickRate)
+    {
+        lastUpdateTick = GetTime();
+        return true;
+    }
+    return false;
+}
+
 Game::Game()
 {
     grid = Grid();
@@ -12,6 +26,7 @@ Game::Game()
     cur = GetRandomBlock();
     next = GetRandomBlock();
 }
+
 Block Game::GetRandomBlock()
 {
     // this looks like a hardware random number generator
@@ -57,30 +72,44 @@ void Game::ControlBlock(char dir)
     {
     case 'l':
         cur.MoveBlock(0, -1);
-        if (_windowCheck())
+        if (_windowCheck() || _blockCheck())
         {
             cur.MoveBlock(0, 1);
         }
         break;
     case 'r':
         cur.MoveBlock(0, 1);
-        if (_windowCheck())
+        if (_windowCheck() || _blockCheck())
         {
             cur.MoveBlock(0, -1);
         }
         break;
     case 'd':
         cur.MoveBlock(1, 0);
-        if (_windowCheck())
+        if (_windowCheck() || _blockCheck())
         {
             cur.MoveBlock(-1, 0);
+            invincibilityFrames++;
+            if (invincibilityFrames * tickRate * 3 > 2)
+            {
+                LockBlock();
+                invincibilityFrames = 0; // reset invincibility frames after locking block
+            }
+            break;
         }
+        invincibilityFrames = 0; // reset invincibility frames in case of no collision
         break;
     case 'u':
     {
 
         std::cout << "rotate :" << std::endl;
         _RotateBlock();
+        if (_blockCheck())
+        {
+            std::cout << "denied" << std::endl;
+            _unRotateBlock();
+            break;
+        }
         break;
     }
     default:
@@ -88,9 +117,34 @@ void Game::ControlBlock(char dir)
     }
 }
 
+void Game::LockBlock()
+{
+    std::vector<position> tiles = cur.GetBlockPos();
+    for (position item : tiles)
+    {
+        grid.grid[item.x][item.y] = cur.id;
+    }
+    cur = next;
+    next = GetRandomBlock();
+}
+
 void Game::_kickBack(int from)
 {
     cur.KickBack(from);
+}
+
+bool Game::_blockCheck()
+{
+    std::vector<position> tiles = cur.GetBlockPos();
+    for (position item : tiles)
+    {
+        if (grid.BlockCheck(item.x, item.y))
+        {
+            std::cout << "Block Check : " << grid.BlockCheck(item.x, item.y) << std::endl;
+            return true;
+        }
+    }
+    return false;
 }
 
 int Game::_windowCheck()
@@ -110,24 +164,37 @@ int Game::_windowCheck()
 
 void Game::_RotateBlock()
 {
-    cur.RotateBlock();
-    int overflow = _windowCheck();
-    if (overflow)
+
+    int overflow = 0;
+    cur.RotateBlock(); // changed to do while cos I-Block was still overflowing
+    do
     {
+        overflow = _windowCheck();
         _kickBack(overflow);
-    }
+    } while (overflow);
+}
+
+void Game::_unRotateBlock()
+{
+    cur.UnRotateBlock();
+    // _kickBack(_windowCheck()); // unnecessary check since window check for previos was obviously fine but for security purpose keep
+    // remove incase of optimization
 }
 
 int main()
 {
     Color iLike = {26, 27, 38, 255};
     InitWindow(800, 450, "Hello ,WIZ!!");
-    SetTargetFPS(60);
+    SetTargetFPS(60); // i hope raylib uses delta time appropriately
     Game game = Game();
 
     while (WindowShouldClose() == false)
     {
         game.HandleInput();
+        if (UpdateTick(tickRate))
+        {
+            game.ControlBlock('d');
+        }
         BeginDrawing();
         ClearBackground(iLike);
         game.Draw();

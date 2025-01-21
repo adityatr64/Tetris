@@ -9,6 +9,7 @@ public:
   void printGrid();
   void DrawGrid();
   int WindowCheck(int, int);
+  bool BlockCheck(int, int);
   int grid[24][10];
 
 private:

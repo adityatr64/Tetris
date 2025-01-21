@@ -48,7 +48,7 @@ int Grid::WindowCheck(int x, int y)
 {
   if (x < 0)
   {
-    return 1;
+    return 4;
   }
   else if (y < 0)
   {
@@ -62,10 +62,15 @@ int Grid::WindowCheck(int x, int y)
   {
     return 2; // right overflow
   }
-  else if (y < 0)
-  {
-    return 4; // top overflow
-  }
   // try to write a switch if possible not needed tbh cos compiler optimizations
   return 0;
+}
+
+bool Grid::BlockCheck(int x, int y)
+{
+  if (grid[x][y] != 0)
+  {
+    return true;
+  }
+  return false;
 }

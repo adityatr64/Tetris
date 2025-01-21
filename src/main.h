@@ -13,9 +13,12 @@ public:
   void ControlBlock(char);
 
 private:
+  void LockBlock();
+  bool _blockCheck();
   void _kickBack(int);
   int _windowCheck();
   void _RotateBlock();
+  void _unRotateBlock();
   std::vector<Block> blocks;
   Block cur;
   Block next;
