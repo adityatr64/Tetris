@@ -29,7 +29,7 @@
         "MIMode": "lldb"
       },
       "linux": {
-        "miDebuggerPath": "/usr/bin/gdb",
+        "miDebuggerPath": "gdb",
       },
       "preLaunchTask": "build debug"
     },
@@ -54,7 +54,7 @@
         "MIMode": "lldb"
       },
       "linux": {
-        "miDebuggerPath": "/usr/bin/gdb"
+        "miDebuggerPath": "gdb"
       },
       "preLaunchTask": "build release",
     }

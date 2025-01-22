@@ -11,8 +11,12 @@ public:
   int WindowCheck(int, int);
   bool BlockCheck(int, int);
   int grid[24][10];
+  int UpdateGrid();
 
 private:
+  bool RowComplete(int);
+  void ClearRow(int);
+  void ShiftRow(int, int);
   int rowSize;
   int columnSize;
   int cellSize;
