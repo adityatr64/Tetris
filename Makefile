@@ -35,14 +35,6 @@ COMPILER_PATH      ?= C:/raylib/w64devkit/bin
 # One of PLATFORM_DESKTOP, PLATFORM_RPI, PLATFORM_ANDROID, PLATFORM_WEB
 PLATFORM           ?= PLATFORM_DESKTOP
 
-# Locations of your newly installed library and associated headers. See ../src/Makefile
-# On Linux, if you have installed raylib but cannot compile the examples, check that
-# the *_INSTALL_PATH values here are the same as those in src/Makefile or point to known locations.
-# To enable system-wide compile-time and runtime linking to libraylib.so, run ../src/$ sudo make install RAYLIB_LIBTYPE_SHARED.
-# To enable compile-time linking to a special version of libraylib.so, change these variables here.
-# To enable runtime linking to a special version of libraylib.so, see EXAMPLE_RUNTIME_PATH below.
-# If there is a libraylib in both EXAMPLE_RUNTIME_PATH and RAYLIB_INSTALL_PATH, at runtime,
-# the library at EXAMPLE_RUNTIME_PATH, if present, will take precedence over the one at RAYLIB_INSTALL_PATH.
 # RAYLIB_INSTALL_PATH should be the desired full path to libraylib. No relative paths.
 DESTDIR ?= /usr/local
 RAYLIB_INSTALL_PATH ?= $(DESTDIR)/lib
@@ -130,23 +122,13 @@ endif
 # RAYLIB_RELEASE_PATH points to provided binaries or your freshly built version
 RAYLIB_RELEASE_PATH 	?= $(RAYLIB_PATH)/src
 
-# EXAMPLE_RUNTIME_PATH embeds a custom runtime location of libraylib.so or other desired libraries
-# into each example binary compiled with RAYLIB_LIBTYPE=SHARED. It defaults to RAYLIB_RELEASE_PATH
-# so that these examples link at runtime with your version of libraylib.so in ../release/libs/linux
-# without formal installation from ../src/Makefile. It aids portability and is useful if you have
-# multiple versions of raylib, have raylib installed to a non-standard location, or want to
-# bundle libraylib.so with your game. Change it to your liking.
-# NOTE: If, at runtime, there is a libraylib.so at both EXAMPLE_RUNTIME_PATH and RAYLIB_INSTALL_PATH,
-# The library at EXAMPLE_RUNTIME_PATH, if present, will take precedence over RAYLIB_INSTALL_PATH,
-# Implemented for LINUX below with CFLAGS += -Wl,-rpath,$(EXAMPLE_RUNTIME_PATH)
-# To see the result, run readelf -d core/core_basic_window; looking at the RPATH or RUNPATH attribute.
-# To see which libraries a built example is linking to, ldd core/core_basic_window;
+
 # Look for libraylib.so.1 => $(RAYLIB_INSTALL_PATH)/libraylib.so.1 or similar listing.
 EXAMPLE_RUNTIME_PATH   ?= $(RAYLIB_RELEASE_PATH)
 
 # Define default C compiler: gcc
 # NOTE: define g++ compiler if using C++
-CC = g++
+CC = clang++
 
 ifeq ($(PLATFORM),PLATFORM_DESKTOP)
     ifeq ($(PLATFORM_OS),OSX)
@@ -186,20 +168,20 @@ endif
 
 # Define compiler flags:
 #  -O0                  defines optimization level (no optimization, better for debugging)
-#  -O1                  defines optimization level
+#  -O2                  defines optimization level
 #  -g                   include debug information on compilation
 #  -s                   strip unnecessary data from build -> do not use in debug builds
 #  -Wall                turns on most, but not all, compiler warnings
-#  -std=c99             defines C language mode (standard C from 1999 revision)
+#  -std=c++20           defines C++ language mode (standard C++ from 2011 revision)
 #  -std=gnu99           defines C language mode (GNU C from 1999 revision)
 #  -Wno-missing-braces  ignore invalid warning (GCC bug 53119)
 #  -D_DEFAULT_SOURCE    use with -std=c99 on Linux and PLATFORM_WEB, required for timespec
-CFLAGS += -Wall -std=c++14 -D_DEFAULT_SOURCE -Wno-missing-braces
+CFLAGS += -Wall -std=c++20 -D_DEFAULT_SOURCE -Wno-missing-braces
 
 ifeq ($(BUILD_MODE),DEBUG)
     CFLAGS += -g -O0
 else
-    CFLAGS += -s -O1
+    CFLAGS += -s -O2
 endif
 
 # Additional flags for compiler (if desired)

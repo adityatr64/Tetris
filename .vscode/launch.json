@@ -37,9 +37,7 @@
       "name": "Run",
       "type": "cppdbg",
       "request": "launch",
-      "args": [
-        "-lraylib"
-      ],
+      "args": [],
       "stopAtEntry": false,
       "cwd": "${workspaceFolder}",
       "environment": [],

@@ -52,19 +52,19 @@
         "command": "C:/raylib/w64devkit/bin/mingw32-make.exe",
         "args": [
           "RAYLIB_PATH=C:/raylib/raylib",
-          "PROJECT_NAME=${fileBasenameNoExtension}",
+          "PROJECT_NAME=$ Tetris_release",
           "OBJS=src/*.cpp"
         ]
       },
       "osx": {
         "args": [
-          "PROJECT_NAME=${fileBasenameNoExtension}",
+          "PROJECT_NAME=$ Tetris_release",
           "OBJS=src/*.cpp"
         ]
       },
       "linux": {
         "args": [
-          "PROJECT_NAME=${fileBasenameNoExtension}",
+          "PROJECT_NAME=$ Tetris_release",
           "OBJS=src/*.cpp"
         ]
       },

@@ -41,6 +41,11 @@ void Game::Draw()
 {
   grid.DrawGrid();
   cur.DrawBlock();
+  if (_blockCheck())
+  {
+    std::cout << "Game Over" << std::endl;
+    exit(0); // game over
+  }
 }
 
 void Game::HandleInput()
@@ -126,6 +131,7 @@ void Game::LockBlock()
   cur = next;
   next = GetRandomBlock();
   grid.UpdateGrid();
+  std::cout << std::gcd(2, 3);
 }
 
 void Game::_kickBack(int from)

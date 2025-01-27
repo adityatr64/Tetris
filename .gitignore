@@ -17,6 +17,8 @@
 main 
 *.html
 *.code-workspaces
+Tetris_release
+
 
 # Ignore temporary files
 *.tmp

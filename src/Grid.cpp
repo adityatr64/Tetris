@@ -47,6 +47,7 @@ void Grid::DrawGrid()
   }
 }
 
+
 int Grid::WindowCheck(int x, int y)
 {
   if (x < 0)
