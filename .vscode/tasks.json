@@ -27,7 +27,7 @@
       },
       "linux": {
         "args": [
-          "PROJECT_NAME=${fileBasenameNoExtension}",
+          "PROJECT_NAME= main",
           "OBJS=src/*.cpp",
           "BUILD_MODE=DEBUG"
         ]
@@ -52,7 +52,7 @@
         "command": "C:/raylib/w64devkit/bin/mingw32-make.exe",
         "args": [
           "RAYLIB_PATH=C:/raylib/raylib",
-          "PROJECT_NAME=$ Tetris_release",
+          "PROJECT_NAME=$ main",
           "OBJS=src/*.cpp"
         ]
       },
@@ -64,7 +64,7 @@
       },
       "linux": {
         "args": [
-          "PROJECT_NAME=$ Tetris_release",
+          "PROJECT_NAME=$ main",
           "OBJS=src/*.cpp"
         ]
       },

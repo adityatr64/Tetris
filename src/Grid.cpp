@@ -41,12 +41,13 @@ void Grid::DrawGrid()
   {
     for (int column = 0; column < columnSize; column++)
     {
-      int colorVal = grid[row][column];                                                                       // 30x30 pixels
-      DrawRectangle(column * cellSize + 1, row * cellSize + 1, cellSize - 1, cellSize - 1, colors[colorVal]); //  -/+ is for offset
+      int colorVal = grid[row][column];                                                                                            // 30x30 pixels
+      Rectangle rec = {(float)(column * cellSize + 1), (float)(row * cellSize + 1), (float)(cellSize - 1), (float)(cellSize - 1)}; // x,y,w,h
+      // DrawRectangle(column * cellSize + 1, row * cellSize + 1, cellSize - 1, cellSize - 1, colors[colorVal]); //  -/+ is for offset
+      DrawRectangleRounded(rec, 0.24, 1, colors[2]);
     }
   }
 }
-
 
 int Grid::WindowCheck(int x, int y)
 {

@@ -10,7 +10,7 @@ public:
   void DrawGrid();
   int WindowCheck(int, int);
   bool BlockCheck(int, int);
-  int grid[24][10];
+  int grid[20][10];
   int UpdateGrid();
 
 private:
