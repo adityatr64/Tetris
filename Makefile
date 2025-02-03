@@ -37,7 +37,6 @@ USE_WAYLAND_DISPLAY?= FALSE
 
 # Compiler and paths
 CC = clang++
-MAKE = mingw32-make
 RAYLIB_RELEASE_PATH ?= $(RAYLIB_PATH)/src
 INCLUDE_PATHS = -I. -I$(RAYLIB_PATH)/src -I$(RAYLIB_PATH)/src/external
 LDFLAGS = -L. -L$(RAYLIB_RELEASE_PATH)
@@ -74,8 +73,8 @@ endif
 # Source and object files
 SRC_DIR = src
 OBJ_DIR = obj
-SRC = $(wildcard $(SRC_DIR)/*.c)
-OBJS = $(SRC:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
+SRC = $(wildcard $(SRC_DIR)/*.cpp)
+OBJS = $(SRC:$(SRC_DIR)/%.cpp=$(OBJ_DIR)/%.o)
 
 # Default target
 all: $(PROJECT_NAME)
@@ -85,8 +84,12 @@ $(PROJECT_NAME): $(OBJS)
 	$(CC) -o $@ $^ $(CFLAGS) $(INCLUDE_PATHS) $(LDFLAGS) $(LDLIBS) -D$(PLATFORM)
 
 # Compile source files
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
+ifeq ($(OS),Windows_NT)
+	@if not exist $(OBJ_DIR) mkdir $(OBJ_DIR)
+else
 	@mkdir -p $(OBJ_DIR)
+endif
 	$(CC) -c $< -o $@ $(CFLAGS) $(INCLUDE_PATHS) -D$(PLATFORM)
 
 # Clean build artifacts
