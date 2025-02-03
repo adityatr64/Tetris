@@ -1,7 +1,8 @@
 #pragma once
 #include <raylib.h>
 #include <vector>
-
+extern const int screenWidth;
+extern const int screenHeight;
 extern const Color gray;
 extern const Color red;
 extern const Color green;

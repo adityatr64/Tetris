@@ -1,6 +1,9 @@
 #include "colors.h"
 #include <vector>
 
+const int screenWidth = 900;
+const int screenHeight = 540;
+
 const Color gray = {128, 128, 128, 255};
 const Color red = {255, 0, 0, 255};
 const Color green = {0, 255, 0, 255};
@@ -8,7 +11,7 @@ const Color blue = {0, 0, 255, 255};
 const Color yellow = {255, 255, 0, 255};
 const Color cyan = {0, 255, 255, 255};
 const Color magenta = {255, 0, 255, 255};
-const Color white = {255, 255, 255, 255};
+const Color white = {200, 200, 200, 200};
 const Color black = {0, 0, 0, 255};
 const Color orange = {255, 165, 0, 255};
 const Color purple = {128, 0, 128, 255};
@@ -19,9 +22,9 @@ const Color skyBlue = {135, 206, 235, 255};
 const Color violet = {238, 130, 238, 255};
 const Color teal = {0, 128, 128, 255};
 const Color lime = {50, 205, 50, 255};
-
+const Color gridCol = {172, 201, 233, 200};
 std::vector<Color> GetColors()
 {
-  std::vector<Color> colors = {gray, red, green, blue, yellow, cyan, magenta, white, black, orange, purple, pink, brown, lightGreen, skyBlue, violet, teal, lime};
+  std::vector<Color> colors = {gridCol, red, green, blue, yellow, cyan, magenta, gray, black, orange, purple, pink, brown, lightGreen, skyBlue, violet, teal, lime};
   return colors;
 }

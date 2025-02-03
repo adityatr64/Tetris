@@ -20,7 +20,9 @@ void Block::DrawBlock()
   std::vector<position> tiles = GetBlockPos(); // makes a tile and sets the rotation
   for (position item : tiles)
   {
-    DrawRectangle(item.y * cellSize, item.x * cellSize, cellSize - 1, cellSize - 1, colors[id]);
+    // DrawRectangle(450 - 90 + item.y * cellSize, item.x * cellSize, cellSize - 1, cellSize - 1, colors[id]);
+    Rectangle rec = {(float)(item.y * cellSize + 390 - 90), (float)(15 + item.x * cellSize), (float)(cellSize - 1), (float)(cellSize - 1)}; // x,y,w,h
+    DrawRectangleRounded(rec, 0.24, 1, colors[id]);
   }
 }
 

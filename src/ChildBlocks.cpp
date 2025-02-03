@@ -184,7 +184,7 @@ class Z_BLOCK : public Block
 public:
   Z_BLOCK()
   {
-    id = 7;
+    id = 9;
     cells[0] = {position(1, 1),
                 position(0, 0),
                 position(0, 1),

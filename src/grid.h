@@ -13,6 +13,7 @@ public:
   int grid[20][10];
   int UpdateGrid();
 
+
 private:
   bool RowComplete(int);
   void ClearRow(int);

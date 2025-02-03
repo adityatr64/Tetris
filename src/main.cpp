@@ -43,8 +43,13 @@ void Game::Draw()
   cur.DrawBlock();
   if (_blockCheck())
   {
-    std::cout << "Game Over" << std::endl;
-    exit(0); // game over
+    cur.MoveBlock(-1, 0);
+    if (_windowCheck() == 4)
+    {
+      cur.MoveBlock(1, 0);
+      std::cout << "Game Over" << std::endl;
+      exit(0); // game over
+    }
   }
 }
 
@@ -139,7 +144,8 @@ void Game::_kickBack(int from)
   cur.KickBack(from);
 }
 
-bool Game::_blockCheck()
+bool Game::
+    _blockCheck()
 {
   std::vector<position> tiles = cur.GetBlockPos();
   for (position item : tiles)
@@ -189,8 +195,8 @@ void Game::_unRotateBlock()
 
 int main()
 {
-  Color iLike = {26, 27, 38, 255};
-  InitWindow(800, 450, "Hello ,WIZ!!");
+  Color iLike = {31, 53, 76, 255};
+  InitWindow(900, 540, "Hello ,WIZ!!");
   SetTargetFPS(60); // i hope raylib uses delta time appropriately
   Game game = Game();
 
